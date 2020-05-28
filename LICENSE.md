@@ -1,6 +1,4 @@
-BSD 3-Clause License
-
-Copyright (c) 2020, docomo-dialog
+Copyright 2020 NTT DOCOMO, INC.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
