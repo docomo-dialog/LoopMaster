@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="xaiml1.1.0" xmlns="http://www.nttdocomo.com/aiml/schema" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.nttdocomo.com/aiml/schema/AIML.xsd">
+
+<!-- Loop 制御を行うBOT -->
+
+<!-- #NEW インスタンスを作成 -->
+	<category>
+		<pattern level="regex">^#new ([^\s]*) ([0-9]+)$</pattern>
+		<pattern level="regex">^#New ([^\s]*) ([0-9]+)$</pattern>
+		<pattern level="regex">^#NEW ([^\s]*) ([0-9]+)$</pattern>
+		<template>
+			<set name="_var_instance_name"><star index="1"/></set>
+			<think>
+				<set><name><get name="_var_instance_name"/></name>0</set>
+				<set><name><get name="_var_instance_name"/>.limit</name><star index="2"/></set>
+				<set><name><get name="_var_instance_name"/>.return1</name>continue</set>
+				<set><name><get name="_var_instance_name"/>.return2</name>break</set>
+			</think>
+		</template>
+	</category>
+
+<!-- #NEW 返り値を指定してのインスタンスを作成 -->
+	<category>
+		<pattern level="regex">^#new ([^\s]*) ([0-9]+) ([^\s]*) ([^\s]*)$</pattern>
+		<pattern level="regex">^#New ([^\s]*) ([0-9]+) ([^\s]*) ([^\s]*)$</pattern>
+		<pattern level="regex">^#NEW ([^\s]*) ([0-9]+) ([^\s]*) ([^\s]*)$</pattern>
+		<template>
+			<set name="_var_instance_name"><star index="1"/></set>
+			<think>
+				<set><name><get name="_var_instance_name"/></name>0</set>
+				<set><name><get name="_var_instance_name"/>.limit</name><star index="2"/></set>
+				<set><name><get name="_var_instance_name"/>.return1</name><star index="3"/></set>
+				<set><name><get name="_var_instance_name"/>.return2</name><star index="4"/></set>
+			</think>
+		</template>
+	</category>
+
+	<category>
+		<pattern level="regex">^#loop ([^\s]*)$</pattern>
+		<pattern level="regex">^#Loop ([^\s]*)$</pattern>
+		<pattern level="regex">^#LOOP ([^\s]*)$</pattern>
+		<template>
+			<think>
+				<set name="_var_instance_name"><star index="1"/></set>
+				<set name="_var_count"><get><name><star index="1"/></name></get></set>
+				<set name="_var_limit"><get><name><get	name="_var_instance_name"/>.limit</name></get></set>
+			</think>
+			<condition><name><get><name>_var_instance_name</name></get></name>
+				<li value="|undefined">400 invalid Instance name</li>
+				<li>
+					<condition name="_var_count">
+						<!-- ループ上限に達していた場合、return2を返す -->
+						<li><value><get name="_var_limit"/>|GREATER_THAN <get name="_var_limit"/></value>
+							<get><name><get	name="_var_instance_name"/>.return2</name></get>
+						</li>
+						<!-- ループ上限に達していない場合、カウントアップして return1を返す -->
+						<li>
+							<think>
+								<!-- カウントアップ -->
+								<set><name><get name="_var_instance_name"/></name><calc operator="+" name="_var_count">1</calc></set>
+							</think>
+							<get><name><get name="_var_instance_name"/>.return1</name></get>
+						</li>
+					</condition>
+				</li>
+			</condition>
+		</template>
+	</category>
+
+	<!-- #DELETE インスタンスを削除 -->
+		<category>
+			<pattern level="regex">^#delete ([^\s]*)$</pattern>
+			<pattern level="regex">^#Delete ([^\s]*)$</pattern>
+			<pattern level="regex">^#DELETE ([^\s]*)$</pattern>
+			<template>
+				<think><set name="_var_instance_name"><star index="1"/></set></think>
+				<condition><name><get><name>_var_instance_name</name></get></name>
+					<li value="|undefined">400 invalid Instance name</li>
+					<li>
+						<think>
+							<set><name><get name="_var_instance_name"/></name>undefined</set>
+							<set><name><get name="_var_instance_name"/>.limit</name>undefined</set>
+							<set><name><get name="_var_instance_name"/>.return1</name>undefined</set>
+							<set><name><get name="_var_instance_name"/>.return2</name>undefined</set>
+						</think>
+						OK
+					</li>
+				</condition>
+			</template>
+		</category>
+
+</aiml>
