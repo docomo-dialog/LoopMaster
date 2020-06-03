@@ -35,4 +35,10 @@ LoopMasterは繰り返し処理や、<srai>と組み合わせて制限回数の�
 <sraix botid="(プロジェクト名)_LoopMaster">#DELETE test</sraix>
 ```
 ループインスタンスを削除します。
-"name" にはインスタンス名を指定してください。
+"name" にはインスタンス名を指定してください。  
+<br/>
+## 利用手順
+1. ボットID「LoopMaster」でボットを作成  
+   "公開"はglobalもしくはpublicに設定
+2. LoopMasterボットにLoopMaster.aimlを追加しデプロイ
+3. 他のボットからsraixタグでLoopMasterボットを呼び出す
