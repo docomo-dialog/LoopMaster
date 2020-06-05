@@ -9,6 +9,8 @@ LoopMasterは繰り返し処理や、<srai>と組み合わせて制限回数の�
 2. LoopMasterボットにLoopMaster.aimlを追加しデプロイ
 3. 他のボットからsraixタグでLoopMasterボットを呼び出す  
 
+<br/>
+
 ## 関数詳細
 ### ループインスタンス作成
 ###### 関数 : #NEW name limit
