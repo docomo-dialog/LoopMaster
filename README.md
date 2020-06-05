@@ -3,6 +3,12 @@
 LoopMasterは繰り返し処理や、<srai>と組み合わせて制限回数の設定などに使用することができます。  
 また、LoopMasterが管理する情報はボット間で共有されるため、複数ボットを連携する際に役立ちます。  
 <br/>
+## 利用手順
+1. ボットID「LoopMaster」でボットを作成  
+   ボット編集にて"公開"をglobalもしくはpublicに設定
+2. LoopMasterボットにLoopMaster.aimlを追加しデプロイ
+3. 他のボットからsraixタグでLoopMasterボットを呼び出す  
+
 ## 関数詳細
 ### ループインスタンス作成
 ###### 関数 : #NEW name limit
@@ -35,10 +41,4 @@ LoopMasterは繰り返し処理や、<srai>と組み合わせて制限回数の�
 <sraix botid="(プロジェクト名)_LoopMaster">#DELETE test</sraix>
 ```
 ループインスタンスを削除します。
-"name" にはインスタンス名を指定してください。  
-<br/>
-## 利用手順
-1. ボットID「LoopMaster」でボットを作成  
-   "公開"はglobalもしくはpublicに設定
-2. LoopMasterボットにLoopMaster.aimlを追加しデプロイ
-3. 他のボットからsraixタグでLoopMasterボットを呼び出す
+"name" にはインスタンス名を指定してください。
